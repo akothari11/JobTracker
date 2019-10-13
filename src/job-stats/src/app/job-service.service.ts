@@ -23,14 +23,6 @@ export class JobServiceService {
 
   constructor(private http: HttpClient) { }
 
-  public jobUpdate(data: JobData) {
-
-  }
-
-  public jobDelete(data: JobData) {
-
-  }
-
   /**
    * Retrieve all jobs of a user
    */

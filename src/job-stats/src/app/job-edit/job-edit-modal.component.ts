@@ -28,7 +28,6 @@ export class JobEditModalComponent  {
     'Declined',
   ];
   public updateJobError: boolean;
-  public retrieveJobDetailsError: boolean;
 
   constructor(private activeModal: NgbActiveModal, private jobService: JobServiceService, private authService: AuthenticationService) {
   }
@@ -62,6 +61,9 @@ export class JobEditModalComponent  {
       // TODO: Update how page is updated after a CRUD operation is performed
       this.activeModal.close();
       document.location.reload();
+    }, (err) => {
+      alert('There was an error deleting the job. Please try again');
+      console.error(err);
     });
   }
 

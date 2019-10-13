@@ -10,7 +10,6 @@ import * as Chart from 'chart.js';
 })
 export class JobStatsComponent implements OnInit {
   @ViewChild('jobChart', { static: true}) jobDoughnutChart: ElementRef;
-
   @ViewChild('jobBarChart', { static: true}) jobBarChart: ElementRef;
   public numJobs: number;
   public numApplied = 0;
@@ -21,7 +20,8 @@ export class JobStatsComponent implements OnInit {
   public numRejected = 0;
   public numDeclined = 0;
   public jobStatsError: boolean;
-  public style: any;
+  // tslint:disable-next-line: object-literal-key-quotes
+  public style = {'display': 'none'};
   private dateArray = [];
   private dateArrayData = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
   private jobsAdded = true;
@@ -144,7 +144,7 @@ export class JobStatsComponent implements OnInit {
           'Applied',
           'Phone Interview',
           'On-site Interview',
-          'Offer',
+          'Offers',
           'Accepted',
           'Rejected',
           'Declined'

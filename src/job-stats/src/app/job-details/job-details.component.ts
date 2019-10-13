@@ -48,6 +48,9 @@ export class JobDetailsComponent  {
   public deleteJob(): void {
     this.jobService.deleteJob(this.jobId).subscribe((data: any) => {
       this.router.navigateByUrl('/job-list');
+    }, (err) => {
+      alert('There was an error deleting the job. Please try again');
+      console.error(err);
     });
   }
 

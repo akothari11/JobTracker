@@ -1,22 +1,19 @@
 <div class="container">
-    <div class="modal-header" style="margin-bottom: 12px;">
-        <h5 class="modal-title">Edit Job Details</h5>
-    </div>
-    <div class="row justify-content-center">
-        <div *ngIf="retrieveJobDetailsError; else elseBlock" style="margin: 40px">
-            <small class="invalidText">
-                    There was an error getting the details for this job. Please try again
-            </small>
-        </div>
-        <ng-template #elseBlock>
-                <app-job-form #jobForm [editMode]="true" [jobId]="jobId"></app-job-form>
-                <small *ngIf="updateJobError" class="invalidText">There was an error updating the job details. Please try again</small>
-        </ng-template>
-    </div>
+  <div class="modal-header" style="margin-bottom: 12px;">
+    <h5 class="modal-title">Edit Job Details</h5>
+  </div>
+  <div class="row justify-content-center">
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-danger mr-auto" (click)="deleteJob();"><i class="fas fa-trash" style="padding-right: 8px"></i>Delete</button>
-        <button type="button" class="btn btn-dark" (click)="activeModal.close()">Cancel</button>
-        <button type="submit" class="btn btn-dark" (click)="validateJobForm();">Apply</button>
+    <div>
+      <app-job-form #jobForm [editMode]="true" [jobId]="jobId"></app-job-form>
+      <small *ngIf="updateJobError" class="invalidText">There was an error updating the job details. Please try again</small>
     </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger mr-auto" (click)="this.jobForm.retrieveJobDetailsError ? '' : deleteJob();"><i class="fas fa-trash"
+        style="padding-right: 8px"></i>Delete</button>
+    <button type="button" class="btn btn-dark" (click)="activeModal.close()">Cancel</button>
+    <button type="submit" class="btn btn-dark" (click)="this.jobForm.retrieveJobDetailsError ? '' : validateJobForm();">Apply</button>
+  </div>
 </div>
