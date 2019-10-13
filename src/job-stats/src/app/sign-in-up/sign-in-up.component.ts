@@ -21,6 +21,7 @@ export class SignInUpComponent implements OnInit {
   public invalidPassword: boolean;
   public invalidName: boolean;
   public authenticationFailed: boolean;
+  public duplicateEmail: boolean;
 
   // tslint:disable-next-line: max-line-length
   constructor(private activeModal: NgbActiveModal, private authService: AuthenticationService, private router: Router, private modalService: NgbModal) {
@@ -48,7 +49,13 @@ export class SignInUpComponent implements OnInit {
         this.activeModal.close();
         this.router.navigateByUrl('/job-list');
       }, (err) => {
-        this.authenticationFailed = true;
+        const error = JSON.parse(err.error);
+        console.log(error);
+        if (error.email === 'duplicate') {
+          this.duplicateEmail = true;
+        } else {
+          this.authenticationFailed = true;
+        }
         console.error(err);
       });
     }

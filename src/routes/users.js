@@ -23,7 +23,7 @@ router.post('/register', (req, res) => {
   user.save(function(err) {
     if (err) {
       console.log(err);
-      return res.status(500).json(err);
+      return res.status(500).json({error: err, email: 'duplicate'});
     }
 
     const token = user.generateJwt();
