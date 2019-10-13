@@ -1,0 +1,44 @@
+<div class="container">
+        <div class="modal-header" style="margin-bottom: 12px;">
+            <h5 class="modal-title">{{login ? 'Sign In' : 'Sign Up'}}</h5>
+        </div>
+        <div class="row justify-content-center">
+    
+            <form>
+                <div *ngIf="!login" class="form-group">
+                        <label for="userName">Name</label>
+                        <input type="text" class="form-control" name="userName" [(ngModel)] = "userCredentials.name">
+                        <div *ngIf="invalidName">
+                            <small class="invalidText">Please provide a valid name.</small>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" class="form-control" name="userEmail" [(ngModel)] = "userCredentials.email">
+                    <div *ngIf="invalidEmail">
+                        <small class="invalidText">Please provide a valid email.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" class="form-control" name="userPassword" [(ngModel)]="userCredentials.password">
+                    <div *ngIf="invalidPassword">
+                        <small class="invalidText">Please provide a valid password.</small>
+                    </div>
+                </div>
+                <div class="row justify-content-center authenticationError">
+                    <small class="invalidText" *ngIf="authenticationFailed && login">There was an error logging in. Please try again</small>
+                    <small class="invalidText" *ngIf="authenticationFailed && !login">There was an error siging up. Please try again</small>
+                </div>
+                <div class="switchModal row justify-content-center">
+                    <small *ngIf="login; else elseBlock">Don't have an account? <a class="accountModal" (click)="open(false)">Create one</a></small>
+                    <ng-template #elseBlock><small>Have an account already? <a class="accountModal" (click)="open(true)">Sign In</a></small></ng-template>
+                </div>
+                
+            </form>
+        </div>
+    
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark" (click)="validateForm();">{{login ? 'Log In' : 'Create Account'}}</button>
+        </div>
+    </div>

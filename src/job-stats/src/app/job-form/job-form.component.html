@@ -1,0 +1,53 @@
+
+<form #jobForm="ngForm">
+  <div class="form-group">
+      <label for="applicationCompany">Company<span class="required">*</span></label>
+      <input type="text" class="form-control" id="applicationCompany" name="company" placeholder="Google" [(ngModel)]="company">
+      <div *ngIf="invalidCompany">
+        <small class="invalidText">Please provide a valid company name.</small>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="applicationPosition">Position<span class="required">*</span></label>
+      <input type="text" class="form-control" id="applicationPosition" name="position" placeholder="Software Engineer" [(ngModel)]="position">
+      <div *ngIf="invalidPosition">
+        <small class="invalidText">Please provide a valid position.</small>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="applicationLocation">Location<span class="required">*</span></label>
+      <input type="text" class="form-control" id="applicationLocation" name="location" placeholder="Mountain View, CA" [(ngModel)]="location">
+      <div *ngIf="invalidLocation">
+        <small class="invalidText">Please provide a valid location.</small>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="applicationDate">Application Date<span class="required">*</span></label>
+      <input type="date" class="form-control" id="applicationDate" name="date" [(ngModel)]="appliedDate">
+      <div *ngIf="invalidDate" class="">
+        <small class="invalidText">Please select a date.</small>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="applicationStatus">Application Status<span class="required">*</span></label>
+      <select class="form-control" id="applicationStatus" name="status" [(ngModel)]="status">
+          <option *ngFor="let status of statusOptions">{{status}} </option>
+      </select>
+      <div *ngIf="invalidStatus" class="">
+        <small class="invalidText">Please select a status.</small>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="applicationLink">Application URL</label>
+      <input type="text" class="form-control" id="applicationUrl" name="url" [(ngModel)]="applicationUrl">
+  </div>
+  <div *ngIf="retrieveJobDetailsError" style="margin: 40px">
+      <small class="invalidText">
+              There was an error getting the details for this job. Please try again
+      </small>
+  </div>
+  <div *ngIf="detailsRoute" class="form-group">
+      <label for="applicationNotes">Notes</label>
+      <textarea type="text" class="form-control" id="applicationNotes" name="notes" placeholder="Add notes" style="padding: 12px" [(ngModel)]="jobNotes"></textarea>
+  </div>
+</form>

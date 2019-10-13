@@ -1,0 +1,26 @@
+<div class="container align-items-center">
+    
+    <div *ngIf="!authService.isLoggedIn(); else elseBlock">
+        <div class="row justify-content-center ">
+                <h4>Welcome to Job Tracker</h4>
+        </div>
+        <div class="row justify-content-center">
+            <p>Keep track of all your job applications in one place, making it easier for you to manage</p>
+        </div>
+        <div class="row justify-content-center">
+            <p>Sign in to add and view jobs you've applied to</p>
+        </div>
+        <div class="row justify-content-md-center">
+                <div class="col col-lg-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-dark btn-lg" (click)="open(true)">Sign In</button>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-dark btn-lg" (click)="open(false)">Sign Up</button>
+                </div>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+      <app-job-stats></app-job-stats>
+    </ng-template>
+    
+</div>

@@ -1,0 +1,27 @@
+.jobTable {
+    
+    transition: opacity 10s ease-in;
+    -webkit-transition: opacity 10s ease-in;
+    border: 0px;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+
+    tr:nth-child(even) {
+        background-color: #FFFFFC;
+    }
+    td {
+        padding: 12px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .tableRow:hover {
+        i {
+            opacity: 1 !important;
+            -webkit-transition: opacity .2s;
+            transition: opacity .2s;
+        }
+    }
+}

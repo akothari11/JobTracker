@@ -1,0 +1,50 @@
+<div clas="container" style="margin-top: -40px">
+    <div class="row justify-content-between" style="margin-bottom: 48px">
+    <div class="col-4">
+      <h2>Dashboard</h2>
+
+    </div>
+    <div class="col-4 text-right">
+      <button title="View jobs" type="button" class="btn btn-dark" routerLink="/job-list"><i
+          class="fas fa-bars"></i></button>
+    </div>
+  </div>
+  <div *ngIf="numJobs <= 0">
+    <div class="row justify-content-center">
+      <h4>You haven't added any jobs yet!</h4>
+    </div>
+
+    <div class="row justify-content-center">
+      <p>Get started below</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <button type="button" class="btn btn-dark" routerLink="/job-add">Add Job</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="jobStatsError" class="row justify-content-center invalidText" style="margin: 20px">It looks like there was
+    an error loading your dashboard... please try again!
+  </div>
+
+  <div *ngIf="numJobs > 0" class="row justify-content-center" style="margin-bottom: 20px">
+    <h4>Here's a quick overview of your current job applications </h4>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col chartBackground" [ngStyle]="style">
+      <!-- <p style="font-weight: bold; font-size: 18px; margin-bottom: 20px">Job Stages</p> -->
+      <canvas #jobChart id="jobChart" ng-init="createDoughnutChart()"></canvas>
+      <div *ngIf="numJobs > 0" class="row justify-content-center" style="margin-top: 30px">
+        <p>Total Job Applications: {{numJobs}}</p>
+      </div>
+    </div>
+
+    <div class="col chartBackground" [ngStyle]="style">
+      <!-- <p style="font-weight: bold; font-size: 18px; margin-bottom: 20px">Jobs Added</p> -->
+      <canvas #jobBarChart id="jobChart"></canvas>
+    </div>
+  </div>
+</div>

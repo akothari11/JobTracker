@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark topNav">
+  <div class="container">
+  <a class="navbar-brand" href="#">Job Tracker</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+      <a class="nav-item nav-link" routerLink="/job-list" routerLinkActive="active">Jobs</a>
+      <a *ngIf="authService.isLoggedIn(); else elseBlock" class="nav-item nav-link" (click)="logout()">Log Out</a>
+      <ng-template #elseBlock><a class="nav-item nav-link" (click)="signIn()">Sign In</a></ng-template>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

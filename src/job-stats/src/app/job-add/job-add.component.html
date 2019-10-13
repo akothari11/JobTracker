@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <app-job-form #jobForm [editMode]="false"></app-job-form>
+    </div>
+    <div *ngIf="jobAddError" class="invalidText row justify-content-center" >
+        <small>There was an error adding the job. Please try again.</small>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-dark" (click)="goBack()">Back</button>
+        </div>
+        <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-dark" (click)="validateJobForm()">Add Job</button>
+        </div>
+    </div>
+</div>

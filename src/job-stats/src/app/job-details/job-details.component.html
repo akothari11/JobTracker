@@ -1,0 +1,18 @@
+<div class="container">
+    <div style="margin-top: -20px; margin-bottom: 12px;">
+        <h5 class="modal-title">Edit Job Details</h5>
+    </div>
+    
+  <app-job-form #jobForm [jobId]="jobId" [detailsRoute]="true"></app-job-form>
+  <div class="row">
+      <div class="col">
+          <button type="button" class="btn btn-danger mr-auto" (click)="deleteJob();"><i class="fas fa-trash" style="padding-right: 8px"></i>Delete</button>
+      </div>
+      <div class="col-auto">
+          <button type="button" class="btn btn-dark" routerLink="/job-list" style="margin-right: 12px">Back</button>
+      </div>
+      <div class="col-auto">
+          <button type="submit" class="btn btn-dark" (click)="validateJobForm();">Apply</button>
+      </div>
+  </div>
+</div>
