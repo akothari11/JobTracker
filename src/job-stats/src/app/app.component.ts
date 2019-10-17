@@ -13,11 +13,27 @@ export class AppComponent {
 
   constructor(private authService: AuthenticationService, private modalService: NgbModal ) {
   }
-  public signIn() {
+
+  /**
+   * Open sign in modal
+   */
+  public signIn(): void {
     const modalRef = this.modalService.open(SignInUpComponent);
     modalRef.componentInstance.login = true;
   }
-  public logout() {
+
+  /**
+   * Call authentication service to log out user
+   */
+  public logout(): void {
     this.authService.logout();
   }
+
+  /**
+   * Call authentication service find if a user is currently logged in
+   */
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
 }

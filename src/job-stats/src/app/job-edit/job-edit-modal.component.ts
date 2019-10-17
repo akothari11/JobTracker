@@ -68,6 +68,13 @@ export class JobEditModalComponent  {
   }
 
   /**
+   * Close the active modal
+   */
+  public closeModal() {
+    this.activeModal.close();
+  }
+
+  /**
    * Update the details of a job
    */
   private updateJob(): void {

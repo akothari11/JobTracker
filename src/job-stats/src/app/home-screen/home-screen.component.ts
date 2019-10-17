@@ -15,8 +15,19 @@ export class HomeScreenComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Open the modal to sign in/sign up
+   * @param signIn true if modal to open is user sign in
+   */
   public open(signIn: boolean): void {
     const modalRef = this.modalService.open(SignInUpComponent);
     modalRef.componentInstance.login = signIn;
+  }
+
+  /**
+   * Call authentication service find if a user is currently logged in
+   */
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

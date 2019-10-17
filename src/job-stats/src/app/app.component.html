@@ -4,7 +4,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
       <a class="nav-item nav-link" routerLink="/job-list" routerLinkActive="active">Jobs</a>
-      <a *ngIf="authService.isLoggedIn(); else elseBlock" class="nav-item nav-link" (click)="logout()">Log Out</a>
+      <a *ngIf="isLoggedIn(); else elseBlock" class="nav-item nav-link" (click)="logout()">Log Out</a>
       <ng-template #elseBlock><a class="nav-item nav-link" (click)="signIn()">Sign In</a></ng-template>
     </div>
   </div>
