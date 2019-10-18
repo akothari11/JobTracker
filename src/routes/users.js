@@ -46,7 +46,7 @@ router.post('/login', (req, res) => {
       res.status(200);
       return res.send(token);
     } else {
-      return res.status(200).send(info);
+      return res.status(500).send(info);
     }
   })(req, res);
 });

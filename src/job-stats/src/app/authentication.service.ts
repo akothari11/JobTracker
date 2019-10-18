@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError, } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface User {
@@ -99,7 +99,9 @@ export class AuthenticationService {
           this.saveToken(token);
         }
         return token;
-      })
+      }), catchError(err => {
+        return throwError(err);
+      }),
     );
     return request;
   }

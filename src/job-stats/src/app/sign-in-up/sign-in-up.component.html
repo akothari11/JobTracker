@@ -30,6 +30,7 @@
                     <small class="invalidText" *ngIf="authenticationFailed && login">There was an error logging in. Please try again</small>
                     <small class="invalidText" *ngIf="authenticationFailed && !login">There was an error signing up. Please try again</small>
                     <small class="invalidText" *ngIf="duplicateEmail && !login">An account with this email has already been registered. Please login</small>
+                    <small class="invalidText" *ngIf="invalidCredentials && login">Invalid email or password</small>
                 </div>
                 <div class="switchModal row justify-content-center">
                     <small *ngIf="login; else elseBlock">Don't have an account? <a class="accountModal" (click)="open(false)">Create one</a></small>

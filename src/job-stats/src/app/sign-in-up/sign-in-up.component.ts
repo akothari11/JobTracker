@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService, UserDetails } from '../authentication.service';
 import { Router } from '@angular/router';
@@ -8,8 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './sign-in-up.component.html',
   styleUrls: ['./sign-in-up.component.scss']
 })
-export class SignInUpComponent implements OnInit {
+export class SignInUpComponent {
+
+  /* The modal to open given the context */
   @Input() public login: boolean;
+
+  /* The information from the sign in/sign up input fields */
   public userCredentials: UserDetails =
   {
     name: '',
@@ -17,17 +21,17 @@ export class SignInUpComponent implements OnInit {
     password: '',
 
   };
+
+  /* Variables to track which error message will be displayed */
   public invalidEmail: boolean;
   public invalidPassword: boolean;
   public invalidName: boolean;
   public authenticationFailed: boolean;
   public duplicateEmail: boolean;
+  public invalidCredentials: boolean;
 
   // tslint:disable-next-line: max-line-length
   constructor(private activeModal: NgbActiveModal, private authService: AuthenticationService, private router: Router, private modalService: NgbModal) {
-  }
-
-  ngOnInit() {
   }
 
   /**
@@ -40,7 +44,11 @@ export class SignInUpComponent implements OnInit {
         this.activeModal.close();
         this.router.navigateByUrl('/');
       }, (err) => {
-        this.authenticationFailed = true;
+        if (err.error) {
+          this.invalidCredentials = true;
+        } else {
+          this.authenticationFailed = true;
+        }
         console.error(err);
       });
     } else {

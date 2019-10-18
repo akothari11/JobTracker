@@ -10,7 +10,7 @@ import passportlocal from 'passport-local';
 import mongoose from 'mongoose';
 
 const app = express();
-const __dirname = '/Users/anujkothari/JobStats/src/job-stats/src/'
+const distDir = '/Users/anujkothari/JobStats/src/job-stats/dist/job-stats'
 const LocalStrategy = passportlocal.Strategy;
 const User = mongoose.model('Users');
 
@@ -23,13 +23,13 @@ function(username, password, done) {
     // Return if user not found in database
     if (!user) {
       return done(null, false, {
-        message: 'User not found'
+        message: 'Invalid email or password'
       });
     }
     // Return if password is wrong
     if (!user.validPassword(password)) {
       return done(null, false, {
-        message: 'Password is wrong'
+        message: 'Invalid email or password'
       });
     }
     // If credentials are correct, return the user object
@@ -38,6 +38,7 @@ function(username, password, done) {
 }
 ));
 
+app.use(express.static(distDir));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
