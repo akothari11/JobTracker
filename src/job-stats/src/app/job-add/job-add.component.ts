@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { JobServiceService } from '../job-service.service';
 import { Router } from '@angular/router';
 import { JobFormComponent } from '../job-form/job-form.component';
@@ -10,7 +10,7 @@ export interface JobData {
   position: string;
   location: string;
   status: string;
-  date: Date;
+  date: string;
   userId: string;
   applicationUrl: string;
   jobNotes: string;
@@ -21,8 +21,16 @@ export interface JobData {
   templateUrl: './job-add.component.html',
   styleUrls: ['./job-add.component.scss']
 })
-export class JobAddComponent implements OnInit {
+export class JobAddComponent {
+
+  /**
+   * Directive to access the job form component instance
+   */
   @ViewChild('jobForm' , {static: false}) public jobForm: JobFormComponent;
+
+  /**
+   * Data for job form input fields
+   */
   public date: Date;
   public company: string;
   public status: string;
@@ -45,18 +53,22 @@ export class JobAddComponent implements OnInit {
     private locationService: Location) {
    }
 
-  ngOnInit() {
-  }
-
-  public goBack() {
+  /**
+   * Routes user to previous page
+   */
+  public goBack(): void {
     this.locationService.back();
   }
-  public createJob() {
+  /**
+   * Create a job using the job service
+   */
+  public createJob(): void {
+    const dateString = `${this.jobForm.appliedDate.year}-${this.jobForm.appliedDate.month}-${this.jobForm.appliedDate.day}`;
     const formData: JobData = {
       company: this.jobForm.company,
       position: this.jobForm.position,
       location: this.jobForm.location,
-      date: this.jobForm.appliedDate,
+      date: dateString,
       status: this.jobForm.status,
       userId: this.authService.getUserDetails()._id,
       applicationUrl: this.jobForm.applicationUrl,
@@ -71,11 +83,16 @@ export class JobAddComponent implements OnInit {
     });
   }
 
-  public validateJobForm() {
+  /**
+   * Validate all the fields of the add form and create job after clicking add
+   */
+  public validateJobForm(): void {
+    // tslint:disable-next-line: max-line-length
+    const isDateValid = this.jobForm.appliedDate.year === undefined || this.jobForm.appliedDate.month === undefined || this.jobForm.appliedDate.day === undefined;
     this.jobForm.invalidCompany = this.jobForm.company.length <= 0;
     this.jobForm.invalidPosition = this.jobForm.position.length <= 0;
     this.jobForm.invalidLocation = this.jobForm.location.length <= 0;
-    this.jobForm.invalidDate = this.jobForm.appliedDate.length <= 0;
+    this.jobForm.invalidDate = isDateValid;
     this.jobForm.invalidStatus = this.jobForm.status.length <= 0;
     // tslint:disable-next-line: max-line-length
     if (!this.jobForm.invalidCompany && !this.jobForm.invalidPosition && !this.jobForm.invalidLocation && !this.jobForm.invalidDate && !this.jobForm.invalidStatus) {

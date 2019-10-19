@@ -9,8 +9,16 @@ import * as Chart from 'chart.js';
   styleUrls: ['./job-stats.component.scss']
 })
 export class JobStatsComponent implements OnInit {
+
+  /**
+   * The canvas elements for each chart
+   */
   @ViewChild('jobChart', { static: true}) jobDoughnutChart: ElementRef;
   @ViewChild('jobBarChart', { static: true}) jobBarChart: ElementRef;
+
+  /**
+   * Variable that holds the stats of all jobs of a user
+   */
   public numJobs: number;
   public numApplied = 0;
   public numPhoneInterview = 0;
@@ -20,6 +28,7 @@ export class JobStatsComponent implements OnInit {
   public numRejected = 0;
   public numDeclined = 0;
   public jobStatsError: boolean;
+
   // tslint:disable-next-line: object-literal-key-quotes
   public style = {'display': 'none'};
   private dateArray = [];
