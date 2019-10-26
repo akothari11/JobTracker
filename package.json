@@ -8,7 +8,7 @@
     "start": "nodemon  --exec babel-node src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anuj Kothari",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.5.5",

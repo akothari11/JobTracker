@@ -7,13 +7,13 @@
   <p *ngIf="updateJobError" class="invalidText">There was an error updating the job details. Please try again</p>
   <div class="row" style="margin-bottom: 40px;">
       <div class="col">
-          <button type="button" class="btn btn-danger mr-auto" (click)="this.jobForm.retrieveJobDetailsError ? '' : deleteJob();"><i class="fas fa-trash" style="padding-right: 8px"></i>Delete</button>
+          <button type="button" class="btn btn-danger mr-auto" (click)="jobForm.retrieveJobDetailsError ? '' : deleteJob();" [ngClass]="{'disabled' : jobForm.retrieveJobDetailsError}"><i class="fas fa-trash" style="padding-right: 8px"></i>Delete</button>
       </div>
       <div class="col-auto">
           <button type="button" class="btn btn-dark" routerLink="/job-list" style="margin-right: 12px">Back</button>
       </div>
       <div class="col-auto">
-          <button type="submit" class="btn btn-dark" (click)="this.jobForm.retrieveJobDetailsError ? '' : validateJobForm();">Apply</button>
+          <button type="submit" class="btn btn-dark" (click)="jobForm.retrieveJobDetailsError ? '' : validateJobForm();">Apply</button>
       </div>
   </div>
 </div>

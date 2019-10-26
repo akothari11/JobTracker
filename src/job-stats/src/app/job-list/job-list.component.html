@@ -1,38 +1,44 @@
 <div class="container">
+  <div>
     <div class="row">
-        <div class="col">
-            <h4>Job Applications</h4>
-        </div>
-        <div class="col-auto">
-            <button type="button" class="btn btn-dark" routerLink="/job-add">Add</button>
-        </div>
-        <div class="col-auto">
-            <input class="form-control" placeholder="Search" type="text" [(ngModel)]="searchValue" (keyup)="searchJobs()">
-        </div>
+      <div class="col">
+        <h4>Job Applications</h4>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-dark" routerLink="/job-add">Add</button>
+      </div>
+      <div class="col-auto">
+        <input class="form-control" placeholder="Search" type="text" [(ngModel)]="searchValue" (keyup)="searchJobs()">
+      </div>
     </div>
-</div>
-<div class="container">
-    <div *ngIf="jobListError; else elseBlock" class="row justify-content-center invalidText" style="margin: 20px">There was an error getting your current job applications. Please try again</div>
+  </div>
+  <div class="tableContainer">
+    <div *ngIf="jobListError; else elseBlock" class="row justify-content-center invalidText jobListError">There was an error getting your current job applications. Please try again</div>
     <ng-template #elseBlock>
-            <table class="jobTable">
-                    <tr class="tableRowSpace">
-                        <th>Company</th>
-                        <th>Position</th>
-                        <th>Location</th>
-                        <th>Application Date</th>
-                        <th>Status</th>
-                    </tr>
-                    <tr class="tableRow" *ngFor="let job of jobs">
-                        <td [routerLink]="['/job-details',job._id]">{{job.company}}</td>
-                        <td [routerLink]="['/job-details',job._id]">{{job.position}}</td>
-                        <td [routerLink]="['/job-details',job._id]">{{job.location}}</td>
-                        <td [routerLink]="['/job-details',job._id]">{{parseDate(job.date)}}</td>
-                        <td [routerLink]="['/job-details',job._id]">{{job.status}}</td>
-                        <td><i style="opacity: 0" class="fas fa-edit" (click)="openModal(job._id)"></i></td>
-                    </tr>
-                </table>
-                <div class="row justify-content-center" *ngIf="numJobs === 0" style="margin-top: 40px">No jobs added yet!</div>
-
+      <table class="jobTable">
+        <tr class="tableRowSpace">
+          <th></th>
+          <th style="padding-top: 18px;">Company</th>
+          <th style="padding-top: 18px;">Position</th>
+          <th style="padding-top: 18px;">Location</th>
+          <th style="padding-top: 18px;">Application Date</th>
+          <th style="padding-top: 18px;">Status</th>
+        </tr>
+        <tr class="tableRow" *ngFor="let job of jobs">
+          <td style="width: 90px"> 
+            <img *ngIf="job.logo; else elseBlockLogo" [routerLink]="['/job-details',job._id]" class="jobLogo" src="{{job.logo}}"/> 
+            <ng-template #elseBlockLogo> <i [routerLink]="['/job-details',job._id]" class="fas fa-image fa-2x" style="margin-left: 20px"></i></ng-template>
+          </td>
+          <td [routerLink]="['/job-details',job._id]">{{job.company}}</td>
+          <td [routerLink]="['/job-details',job._id]">{{job.position}}</td>
+          <td [routerLink]="['/job-details',job._id]">{{job.location}}</td>
+          <td [routerLink]="['/job-details',job._id]">{{parseDate(job.date)}}</td>
+          <td [routerLink]="['/job-details',job._id]">{{job.status}}</td>
+          <td><i style="opacity: 0" class="fas fa-edit" title="Edit" (click)="openModal(job._id)"></i></td>
+        </tr>
+      </table>
+      <div class="row justify-content-center" *ngIf="numJobs === 0" style="margin-top: 40px">No jobs added yet!</div>
     </ng-template>
-    
+
+  </div>
 </div>

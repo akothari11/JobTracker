@@ -14,6 +14,7 @@ export interface JobData {
   userId: string;
   applicationUrl: string;
   jobNotes: string;
+  logo: string;
 }
 
 @Component({
@@ -45,6 +46,10 @@ export class JobAddComponent {
     'Rejected',
     'Declined',
   ];
+
+  /**
+   * Error status when adding a job
+   */
   public jobAddError: boolean;
   constructor(
     private jobService: JobServiceService,
@@ -65,14 +70,15 @@ export class JobAddComponent {
   public createJob(): void {
     const dateString = `${this.jobForm.appliedDate.year}-${this.jobForm.appliedDate.month}-${this.jobForm.appliedDate.day}`;
     const formData: JobData = {
-      company: this.jobForm.company,
+      company: typeof this.jobForm.company === 'object' ? this.jobForm.company.name : this.jobForm.company,
       position: this.jobForm.position,
       location: this.jobForm.location,
       date: dateString,
       status: this.jobForm.status,
       userId: this.authService.getUserDetails()._id,
       applicationUrl: this.jobForm.applicationUrl,
-      jobNotes: ''
+      jobNotes: '',
+      logo: this.jobForm.companyLogo
     };
     this.jobService.createJob(formData).subscribe((data: any) => {
       this.jobAddError = false;

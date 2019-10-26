@@ -35,7 +35,6 @@ export class JobListComponent implements OnDestroy {
       this.jobs = data;
       this.jobList = data;
       this.numJobs = this.jobs.length;
-
     }, (err) => {
       this.jobListError = true;
       console.error(err);

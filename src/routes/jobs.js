@@ -36,7 +36,8 @@ router.post('/', async (req, res) => {
     date: req.body.date,
     userId: req.body.userId,
     applicationUrl: req.body.applicationUrl,
-    notes: req.body.jobNotes
+    notes: req.body.jobNotes,
+    logo: req.body.logo
   });
   return res.send(job);
 });

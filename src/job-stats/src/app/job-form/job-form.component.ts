@@ -1,5 +1,7 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 import { JobServiceService, JobDetails } from '../job-service.service';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-job-form',
@@ -11,7 +13,7 @@ export class JobFormComponent implements AfterViewInit {
   @Input() public detailsRoute: boolean;
   @Input() public jobId: string;
 
-  public company = '';
+  public company: any = '';
   public appliedDate: any = '';
   public location = '';
   public position = '';
@@ -27,29 +29,70 @@ export class JobFormComponent implements AfterViewInit {
   ];
   public status: string = this.statusOptions[0];
   public jobNotes = '';
-
+  public companyLogo = '';
   public invalidCompany: boolean;
   public invalidPosition: boolean;
   public invalidLocation: boolean;
   public invalidDate: boolean;
   public invalidStatus: boolean;
   public retrieveJobDetailsError: boolean;
+  public companyList = [];
+
+  /**
+   * Search function for bootstrap's typeahead on a input field
+   */
+  search = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    map(term => {
+        this.queryCompanies();
+        return term.length < 2 ? [] : this.companyList.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10);
+      }
+    )
+  )
+
+  /**
+   * Formatter for bootstrap's typeahead on a input field
+   */
+  formatter = (x: {name: string}) => x.name;
+
   constructor(private jobService: JobServiceService) { }
 
   /**
    * Set details of form when opening edit modal
    */
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     if (this.jobId) {
       this.setJobDetails(this.jobId);
     }
   }
+
+  /**
+   * Set the company logo when selecting a company from the company list
+   * @param $event the selected item in the list
+   */
+  public itemSelected($event) {
+    this.companyLogo = $event.item.logo;
+  }
+
+  /**
+   * Get list of companies that match the text entered in the company input field
+   */
+  public queryCompanies() {
+    if (this.company) {
+      this.jobService.queryCompanies(this.company).subscribe((data: any) => {
+        this.companyList = data;
+      });
+    }
+  }
+
   private setJobDetails(id: string): void {
     this.jobService.getJob(id).subscribe((data: any) => {
       if (data && data.length === 1) {
         this.retrieveJobDetailsError = false;
         const job: JobDetails = data[0];
-        this.company = job.company;
+        this.company = {name: job.company};
         this.location = job.location;
         this.status = job.status;
         this.position = job.position;

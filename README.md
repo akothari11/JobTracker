@@ -1,2 +1,2 @@
 # JobTracker
-Web application to manage job applications
+Web app to manage job applications

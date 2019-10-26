@@ -40,6 +40,10 @@ const jobSchema = new mongoose.Schema({
   notes: {
     type: String,
     required: false,
+  },
+  logo: {
+    type: String,
+    required: false
   }
 });
 const Job = mongoose.model('Jobs', jobSchema);
