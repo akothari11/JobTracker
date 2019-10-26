@@ -61,7 +61,7 @@ export class JobDetailsComponent  {
     const data: any = {
       jobId: this.jobId,
       formData: {
-        company: this.jobForm.company,
+        company: this.jobForm.company.name,
         position: this.jobForm.position,
         location: this.jobForm.location,
         date: this.jobForm.appliedDate,
