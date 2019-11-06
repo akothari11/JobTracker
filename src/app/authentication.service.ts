@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError, } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { environment } from '../environments/environment';
 export interface User {
   _id: string;
   email: string;
@@ -92,7 +92,7 @@ export class AuthenticationService {
 
   private request(type: 'login'|'register', user?: UserDetails): Observable<any> {
     let jwt: Observable<any>;
-    jwt = this.http.post(`http://localhost:8000/api/users/${type}`, user, {responseType: 'text'});
+    jwt = this.http.post(`${environment.baseURL}/${type}`, user, {responseType: 'text'});
     const request = jwt.pipe(
       map((token: string) => {
         if (token) {

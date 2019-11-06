@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JobData } from './job-add/job-add.component';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 export interface JobDetails {
   company: string;
@@ -37,7 +38,7 @@ export class JobServiceService {
    * @param userId the id of a user
    */
   public getJobs(userId: string): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/jobs/joblist/${userId}`);
+    return this.http.get(`${environment.baseURL}/jobs/joblist/${userId}`);
   }
 
   /**
@@ -45,7 +46,7 @@ export class JobServiceService {
    * @param id the id of a job
    */
   public getJob(id: string): Observable<any>  {
-    return this.http.get(`http://localhost:8000/api/jobs/job/${id}`);
+    return this.http.get(`${environment.baseURL}/jobs/job/${id}`);
   }
 
   /**
@@ -53,7 +54,7 @@ export class JobServiceService {
    * @param data the job application data
    */
   public createJob(data: JobData): Observable<any>  {
-    return this.http.post('http://localhost:8000/api/jobs', data);
+    return this.http.post(`${environment.baseURL}/jobs`, data);
   }
 
   /**
@@ -61,7 +62,7 @@ export class JobServiceService {
    * @param id the id of a job
    */
   public deleteJob(id: string): Observable<any>  {
-    return this.http.delete(`http://localhost:8000/api/jobs/${id}`);
+    return this.http.delete(`${environment.baseURL}/jobs/${id}`);
   }
 
   /**
@@ -69,6 +70,6 @@ export class JobServiceService {
    * @param data the job application data
    */
   public updateJob(data: JobData): Observable<any>  {
-    return this.http.put('http://localhost:8000/api/jobs', data);
+    return this.http.put(`${environment.baseURL}/jobs`, data);
   }
 }
