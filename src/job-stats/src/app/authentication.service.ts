@@ -48,7 +48,7 @@ export class AuthenticationService {
    */
   public getUserDetails(): User {
     const token = this.getToken();
-    if (token) {
+    if (token && token.indexOf('User not found') < 0) {
       let payload = token.split('.')[1];
       payload = window.atob(payload);
       return JSON.parse(payload);
@@ -92,7 +92,7 @@ export class AuthenticationService {
 
   private request(type: 'login'|'register', user?: UserDetails): Observable<any> {
     let jwt: Observable<any>;
-    jwt = this.http.post(`http://localhost:8000/users/${type}`, user, {responseType: 'text'});
+    jwt = this.http.post(`http://localhost:8000/api/users/${type}`, user, {responseType: 'text'});
     const request = jwt.pipe(
       map((token: string) => {
         if (token) {

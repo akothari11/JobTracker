@@ -37,7 +37,7 @@ export class JobServiceService {
    * @param userId the id of a user
    */
   public getJobs(userId: string): Observable<any> {
-    return this.http.get(`http://localhost:8000/jobs/joblist/${userId}`);
+    return this.http.get(`http://localhost:8000/api/jobs/joblist/${userId}`);
   }
 
   /**
@@ -45,7 +45,7 @@ export class JobServiceService {
    * @param id the id of a job
    */
   public getJob(id: string): Observable<any>  {
-    return this.http.get(`http://localhost:8000/jobs/job/${id}`);
+    return this.http.get(`http://localhost:8000/api/jobs/job/${id}`);
   }
 
   /**
@@ -53,7 +53,7 @@ export class JobServiceService {
    * @param data the job application data
    */
   public createJob(data: JobData): Observable<any>  {
-    return this.http.post('http://localhost:8000/jobs', data);
+    return this.http.post('http://localhost:8000/api/jobs', data);
   }
 
   /**
@@ -61,7 +61,7 @@ export class JobServiceService {
    * @param id the id of a job
    */
   public deleteJob(id: string): Observable<any>  {
-    return this.http.delete(`http://localhost:8000/jobs/${id}`);
+    return this.http.delete(`http://localhost:8000/api/jobs/${id}`);
   }
 
   /**
@@ -69,6 +69,6 @@ export class JobServiceService {
    * @param data the job application data
    */
   public updateJob(data: JobData): Observable<any>  {
-    return this.http.put('http://localhost:8000/jobs', data);
+    return this.http.put('http://localhost:8000/api/jobs', data);
   }
 }

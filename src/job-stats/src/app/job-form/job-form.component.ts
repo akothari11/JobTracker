@@ -47,7 +47,7 @@ export class JobFormComponent implements AfterViewInit {
     distinctUntilChanged(),
     map(term => {
         this.queryCompanies();
-        return term.length < 2 ? [] : this.companyList.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10);
+        return term.length < 1 ? [] : this.companyList.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10);
       }
     )
   )
