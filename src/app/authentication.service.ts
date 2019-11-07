@@ -92,7 +92,7 @@ export class AuthenticationService {
 
   private request(type: 'login'|'register', user?: UserDetails): Observable<any> {
     let jwt: Observable<any>;
-    jwt = this.http.post(`${environment.baseURL}/api/${type}`, user, {responseType: 'text'});
+    jwt = this.http.post(`${environment.baseURL}/api/users/${type}`, user, {responseType: 'text'});
     const request = jwt.pipe(
       map((token: string) => {
         if (token) {
