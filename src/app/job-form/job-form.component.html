@@ -33,7 +33,7 @@
     <div class="form-group">
         <label for="applicationDate">Application Date<span class="required">*</span></label>
         <div class="input-group">
-          <input ngbDatepicker #d="ngbDatepicker" class="form-control" id="applicationDate" name="date" placeholder="mm/dd/yyyy" [(ngModel)]="appliedDate">
+          <input ngbDatepicker #d="ngbDatepicker" class="form-control" id="applicationDate" name="date" placeholder="YYYY-MM-DD" [(ngModel)]="appliedDate">
           <div class="input-group-append">
               <button class="btn btn-outline-secondary btn-sm " (click)="d.toggle()" type="button"> <i class="fas fa-calendar-alt fa-fw"></i></button>
             </div>

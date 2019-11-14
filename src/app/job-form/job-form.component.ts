@@ -2,6 +2,7 @@ import { Component, Input, AfterViewInit } from '@angular/core';
 import { JobServiceService, JobDetails } from '../job-service.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-job-form',
@@ -107,20 +108,26 @@ export class JobFormComponent implements AfterViewInit {
     });
   }
 
-  private parseDate(date: any): string {
+  private parseDate(date: any): NgbDateStruct {
     const dateObj = new Date(date);
-    const year = dateObj.getFullYear();
-    const month = dateObj.getUTCMonth() + 1;
+    const yearValue = dateObj.getFullYear();
+    const monthValue = dateObj.getUTCMonth() + 1;
     const dt = dateObj.getUTCDate();
-    let day = dt.toString();
-    let mo = month.toString();
+    let dayValue = dt.toString();
+    let mo = monthValue.toString();
     if (dt < 10) {
-          day = '0' + dt;
-        }
-    if (month < 10) {
-          mo = '0' + month;
-        }
-    return year + '-' + mo + '-' + day;
+      dayValue = '0' + dt;
+    }
+    if (monthValue < 10) {
+      mo = '0' + monthValue;
+    }
+    // Return the data in json object for ngbDatePicker
+    const ngbDateObj: NgbDateStruct = {
+      year: yearValue,
+      month: parseInt(mo, 10),
+      day: parseInt(dayValue, 10)
+    };
+    return ngbDateObj;
   }
 
 }

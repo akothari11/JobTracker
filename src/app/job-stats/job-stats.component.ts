@@ -207,7 +207,7 @@ export class JobStatsComponent implements OnInit {
                 case 'ON-SITE INTERVIEW': {
                   return (this.numOnSite > 0);
                 }
-                case 'OFFER': {
+                case 'OFFERS': {
                   return (this.numOffer > 0);
                 }
                 case 'ACCEPTED': {

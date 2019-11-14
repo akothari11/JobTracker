@@ -21,16 +21,18 @@ export class JobDetailsComponent  {
   ) {
     this.jobId = this.route.snapshot.paramMap.get('id');
   }
-
   /**
    * Check that all fields have text entered
    */
   public validateJobForm() {
+    // tslint:disable-next-line: max-line-length
+    const isDateValid = this.jobForm.appliedDate.year === undefined || this.jobForm.appliedDate.month === undefined || this.jobForm.appliedDate.day === undefined;
     this.jobForm.invalidCompany = this.jobForm.company.length <= 0;
     this.jobForm.invalidPosition = this.jobForm.position.length <= 0;
     this.jobForm.invalidLocation = this.jobForm.location.length <= 0;
-    this.jobForm.invalidDate = this.jobForm.appliedDate.length <= 0;
+    this.jobForm.invalidDate = isDateValid;
     this.jobForm.invalidStatus = this.jobForm.status.length <= 0;
+
     // tslint:disable-next-line: max-line-length
     if (!this.jobForm.invalidCompany && !this.jobForm.invalidPosition && !this.jobForm.invalidLocation && !this.jobForm.invalidDate && !this.jobForm.invalidStatus) {
       this.jobForm.invalidCompany = false;
@@ -58,13 +60,14 @@ export class JobDetailsComponent  {
    * Update the details of a job
    */
   private updateJob(): void {
+    const dateString = `${this.jobForm.appliedDate.year}-${this.jobForm.appliedDate.month}-${this.jobForm.appliedDate.day}`;
     const data: any = {
       jobId: this.jobId,
       formData: {
         company: this.jobForm.company.name,
         position: this.jobForm.position,
         location: this.jobForm.location,
-        date: this.jobForm.appliedDate,
+        date: dateString,
         status: this.jobForm.status,
         userId: this.authService.getUserDetails()._id,
         applicationUrl: this.jobForm.applicationUrl,
